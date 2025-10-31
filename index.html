@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avinash - Portfolio </title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons CDN for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="letter-a-logo-icon-design-vector-22731542.webp" type="image/png">
+    <script>
+        // Custom Tailwind theme settings
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        raleway: ['Raleway', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#4f46e5', // indigo-600
+                        'primary-dark': '#4338ca', // indigo-700
+                        'primary-light': '#eef2ff', // indigo-50
+                        'dark-heading': '#1e293b', // slate-800
+                        'light-text': '#475569', // slate-600
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #475569; /* light-text */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Raleway', sans-serif;
+            color: #1e293b; /* dark-heading */
+        }
+        
+        /* Section heading line */
+        .section-title h2 {
+            position: relative;
+            padding-bottom: 12px;
+            font-size: 2.25rem; /* 36px */
+            font-weight: 700;
+        }
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #4f46e5; /* primary */
+            bottom: 0;
+            left: 0;
+        }
+        
+        /* Skills progress bar */
+        .progress-bar {
+            background-color: #4f46e5; /* primary */
+            height: 10px;
+        }
+        
+        /* Typed cursor effect */
+        .typed-cursor {
+            opacity: 1;
+            font-weight: 100;
+            font-size: 2.5rem;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Hero text shadow */
+        #hero h1, #hero p {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Nav link styling */
+        .nav-link {
+            @apply block py-2 px-3 text-white lg:text-white rounded lg:bg-transparent lg:p-0 transition-colors duration-300;
+        }
+        .nav-link:hover {
+            @apply text-white lg:text-primary;
+        }
+        .nav-link.active {
+            @apply text-white lg:text-primary;
+        }
+        /* Scrolled state */
+        #header.scrolled #logo-link {
+            @apply lg:text-dark-heading;
+        }
+        #header.scrolled .nav-link {
+            @apply lg:text-light-text;
+        }
+        #header.scrolled .nav-link:hover {
+            @apply lg:text-primary;
+        }
+        #header.scrolled .nav-link.active {
+            @apply lg:text-primary;
+        }
+        
+        /* Mobile nav visible */
+        #mobile-menu {
+            @apply hidden absolute top-14 right-4 z-50;
+        }
+        #mobile-menu.active {
+            @apply block;
+        }
+        #mobile-menu-toggle {
+            @apply text-dark-heading;
+        }
+        #header.scrolled #mobile-menu-toggle {
+            @apply text-dark-heading;
+        }
+        #header:not(.scrolled) #mobile-menu-toggle {
+            @apply lg:text-white;
+        }
+
+        /* Social media link styling */
+        .social-link {
+            @apply text-white transition-colors duration-300;
+        }
+        .social-link:hover {
+            @apply text-primary;
+        }
+        
+        #header.scrolled .social-link {
+            @apply text-light-text;
+        }
+        #header.scrolled .social-link:hover {
+            @apply text-primary;
+        }
+        #header.scrolled .social-border {
+             @apply border-slate-300;
+        }
+
+
+        /* Back to top button */
+        #to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #4f46e5; /* primary */
+            color: white;
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        #to-top.visible {
+            display: flex;
+        }
+        #to-top:hover {
+            background-color: #4338ca; /* primary-dark */
+        }
+
+    </style>
+</head>
+<body class="bg-white">
+
+    <!-- Header -->
+    <header id="header" class="fixed w-full z-40 transition-all duration-300">
+        <nav class="container mx-auto px-4 lg:px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="index.html" id="logo-link" class="text-3xl font-bold text-dark-heading lg:text-grey transition-colors duration-300">Avinash</a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="hidden lg:flex lg:flex-row lg:space-x-8 lg:mt-0 lg:font-medium">
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#resume" class="nav-link">Resume</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <!-- Social Media Icons -->
+                    <div class="social-border flex space-x-4 pl-6 ml-6 border-l border-white/30 transition-colors duration-300">
+                        <a href="https://x.com/avinashukla960" class="social-link"><i class='bx bxl-twitter text-xl'></i></a>
+                        <a href="#" class="social-link"><i class='bx bxl-facebook text-xl'></i></a>
+                        <a href="https://www.instagram.com/avinash_shukla960?igsh=eWozd3Vnamhsczhz" class="social-link"><i class='bx bxl-instagram text-xl'></i></a>
+                        <a href="https://www.linkedin.com/in/avinash-shukla-9658b1375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-link"><i class='bx bxl-linkedin text-xl'></i></a>
+                    </div>
+
+                <!-- Mobile Nav Toggle -->
+                <button id="mobile-menu-toggle" class="lg:hidden text-2xl p-2 rounded-md hover:bg-gray-100 transition-colors duration-300">
+                    <i class='bx bx-menu'></i>
+                </button>
+            </div>
+
+            <!-- ... existing code ... -->
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="lg:hidden w-48 bg-dark-heading rounded-md shadow-lg py-1">
+                <a href="#hero" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#resume" class="nav-link">Resume</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                 <!-- Mobile Social Links -->
+                <div class="flex justify-center space-x-4 p-3 border-t border-slate-700 mt-2">
+                    <a href="https://x.com/avinashukla960" class="text-white hover:text-primary transition-colors duration-200"><i class='bx bxl-twitter text-xl'></i></a>
+                    <a href="#" class="text-white hover:text-primary transition-colors duration-200"><i class='bx bxl-facebook text-xl'></i></a>
+                    <a href="https://www.instagram.com/avinash_shukla960?igsh=eWozd3Vnamhsczhz" class="text-white hover:text-primary transition-colors duration-200"><i class='bx bxl-instagram text-xl'></i></a>
+                    <a href="https://www.linkedin.com/in/avinash-shukla-9658b1375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-white hover:text-primary transition-colors duration-200"><i class='bx bxl-linkedin text-xl'></i></a>
+                </div>
+            </div>
+<!-- ... existing code ... -->
+           
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="w-full h-screen flex items-center justify-start bg-cover bg-center bg-no-repeat" style="background-image: url('1761903199692 (2).jpg');">
+        <div class="relative text-left -mt-16 lg:-mt-0 container mx-auto px-4 lg:px-6">
+            <h1 class="text-5xl lg:text-7xl font-bold text-grey mb-4">Avinash Shukla</h1>
+            <p class="text-2xl lg:text-4xl text-grey">I'm a <span id="typed-text" class="font-semibold"></span><span class="typed-cursor">|</span></p>
+        </div>
+    </section>
+
+    <main id="main">
+
+        <!-- About Section -->
+        <section id="about" class="py-16 lg:py-24">
+            <div class="container mx-auto px-4 lg:px-6">
+                <div class="section-title mb-8">
+                    <h2>About</h2>
+                    <p class="mt-4 text-light-text text-lg">Hi, I'm Avinash, a Developer with a love for technology and design. My goal is to create work that not only functions perfectly but also inspires and engages users.</p>
+                </div>
+
+                <div class="flex flex-wrap -mx-4">
+                    <!-- Profile Image -->
+                    <div class="w-full lg:w-1/3 px-4 mb-6 lg:mb-0">
+                        <img src="1761906689417.jpg" class="rounded-lg shadow-lg" alt="Avinash Kumar">
+                    </div>
+                    <!-- Profile Details -->
+                    <div class="w-full lg:w-2/3 px-4">
+                        <h3 class="text-3xl font-bold text-primary mb-2">Web Developer , Programmer & UI/UX Designer</h3>
+                        <p class="italic mb-6">
+                            
+                        </p>
+                        <div class="flex flex-wrap -mx-4 mb-6">
+                            <div class="w-full lg:w-1/2 px-4 mb-4">
+                                <ul class="space-y-3">
+                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Birthday:</strong> 4th April 2008</li>
+                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Website:</strong> www.avinashshukla.com</li>
+                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Phone:</strong> +91 9302924426</li>
+                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>City:</strong> Rewa Madhya Pradesh India</li>
+                                </ul>
+                            </div>
+                            <div class="w-full lg:w-1/2 px-4 mb-4">
+                                <ul class="space-y-3">
+                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Age:</strong> 17</li>
+                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Degree:</strong> Bachelor(Running)</li>
+                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Email:</strong> avinashshukla960@gmail.com</li>
+                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Freelance:</strong> Available</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-light-text">
+                           
+A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and highly performant digital experiences. I thrive on solving complex problems and turning innovative ideas into reality.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Skills -->
+                <div class="mt-12">
+                    <div class="section-title mb-8">
+                        <h2>Skills</h2>
+                    </div>
+                    <div class="flex flex-wrap -mx-4">
+                        <div class="w-full lg:w-1/2 px-4 mb-4">
+                            <div class="mb-2 flex justify-between">
+                                <span class="font-medium text-dark-heading">HTML</span>
+                                <span class="font-medium text-dark-heading">65%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                <div class="progress-bar rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2 px-4 mb-4">
+                            <div class="mb-2 flex justify-between">
+                                <span class="font-medium text-dark-heading">CSS</span>
+                                <span class="font-medium text-dark-heading">65%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                <div class="progress-bar rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2 px-4 mb-4">
+                            <div class="mb-2 flex justify-between">
+                                <span class="font-medium text-dark-heading">C</span>
+                                <span class="font-medium text-dark-heading">80%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                <div class="progress-bar rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2 px-4 mb-4">
+                            <div class="mb-2 flex justify-between">
+                                <span class="font-medium text-dark-heading">Creative Editing/Sketching</span>
+                                <span class="font-medium text-dark-heading">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                <div class="progress-bar rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="py-16 lg:py-24 bg-slate-50">
+            <div class="container mx-auto px-4 lg:px-6">
+                <div class="section-title mb-8">
+                    <h2>Resume</h2>
+                    <p class="mt-4 text-light-text text-lg">Check out my resume - </p>
+                </div>
+                
+                <div class="flex flex-wrap -mx-4">
+                    <!-- Left Column -->
+                    <div class="w-full lg:w-1/2 px-4">
+                        <h3 class="text-2xl font-bold text-dark-heading mb-4">Summary</h3>
+                        <div class="relative border-l-2 border-primary pl-6 mb-6">
+                            <h4 class="text-xl font-bold text-primary">Avinash Shukla</h4>
+                            <p class="italic mb-2">Innovative and deadline-driven Graphic Designer with 2+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Rewa Madhya Pradesh India</li>
+                                <li>+91 9302924426</li>
+                                <li>avinashshukla960@gmail.com</li>
+                            </ul>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-dark-heading mb-4">Education</h3>
+                        <div class="relative border-l-2 border-primary pl-6 mb-6">
+                            <h4 class="text-xl font-bold text-primary">Bachelor of Technology</h4>
+                            <span class="inline-block bg-primary-light text-dark-heading font-medium px-3 py-1 rounded-md text-sm my-2">2025 - 2029</span>
+                            <p class="italic mb-2">Jaypee University OF Engineering and Technology Guna</p>
+                            
+                        <div class="relative border-l-2 border-primary pl-6 mb-6">
+                            <h4 class="text-xl font-bold text-primary">High School</h4>
+                            <span class="inline-block bg-primary-light text-dark-heading font-medium px-3 py-1 rounded-md text-sm my-2">2024 - 2025</span>
+                            <p class="italic mb-2">Sardar Patel Higher Secondary School Jaypee Nagar Rewa</p>
+                            
+                    </div>
+
+                    <!-- Right Column -->
+                    
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 lg:py-24">
+            <div class="container mx-auto px-4 lg:px-6">
+                <div class="section-title mb-8">
+                    <h2>Services</h2>
+                    
+                </div>
+                
+                <div class="flex flex-wrap -mx-4">
+                    <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-6">
+                        <div class="p-6 text-center border border-slate-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="inline-flex items-center justify-center w-16 h-16 mb-4 text-white bg-primary rounded-full text-3xl">
+                                <i class='bx bxl-dribbble'></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">Web Development</h4>
+                            
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-6">
+                        <div class="p-6 text-center border border-slate-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="inline-flex items-center justify-center w-16 h-16 mb-4 text-white bg-primary rounded-full text-3xl">
+                                <i class='bx bx-file'></i>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-2">Software Developement</h4>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-16 lg:py-24 bg-slate-50">
+            <div class="container mx-auto px-4 lg:px-6">
+                <div class="section-title mb-8">
+                    <h2>Portfolio</h2>
+                    <p class="mt-4 text-light-text text-lg">
+                </div>
+
+                <!-- Note: The original has isotope filtering, this is a simplified static grid -->
+                <div class="flex flex-wrap -mx-2">
+                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                        <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+1" class="w-full rounded-lg shadow-md" alt="Portfolio Item 1">
+                    </div>
+                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                        <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+2" class="w-full rounded-lg shadow-md" alt="Portfolio Item 2">
+                    </div>
+                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                        <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+3" class="w-full rounded-lg shadow-md" alt="Portfolio Item 3">
+                    </div>
+                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                        <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+4" class="w-full rounded-lg shadow-md" alt="Portfolio Item 4">
+                    </div>
+                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                        <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+5" class="w-full rounded-lg shadow-md" alt="Portfolio Item 5">
+                    </div>
+                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                        <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+6" class="w-full rounded-lg shadow-md" alt="Portfolio Item 6">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 lg:py-24">
+            <div class="container mx-auto px-4 lg:px-6">
+                <div class="section-title mb-8">
+                    <h2>Contact</h2>
+                    
+                </div>
+
+                <div class="flex flex-wrap -mx-4">
+                    <!-- Contact Info -->
+                    <div class="w-full lg:w-1/3 px-4">
+                        <div class="space-y-6">
+                            <div class="flex items-start p-4 bg-primary-light rounded-lg">
+                                <i class="bx bx-map text-3xl text-primary p-3 bg-white rounded-full shadow-md"></i>
+                                <div class="ml-4">
+                                    <h4 class="text-xl font-bold">Location:</h4>
+                                    <p>Jaypee University Of Engineering And Technology Guna</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-primary-light rounded-lg">
+                                <i class="bx bx-envelope text-3xl text-primary p-3 bg-white rounded-full shadow-md"></i>
+                                <div class="ml-4">
+                                    <h4 class="text-xl font-bold">Email:</h4>
+                                    <p>avinashsukla960@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start p-4 bg-primary-light rounded-lg">
+                                <i class="bx bx-phone text-3xl text-primary p-3 bg-white rounded-full shadow-md"></i>
+                                <div class="ml-4">
+                                    <h4 class="text-xl font-bold">Call:</h4>
+                                    <p>+91 9302924426</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="w-full lg:w-2/3 px-4 mt-8 lg:mt-0">
+                        <form action="#" method="post" role="form" class="p-6 bg-white rounded-lg shadow-lg border border-slate-200">
+                            <div class="flex flex-wrap -mx-3 mb-6">
+                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                    <label class="block uppercase tracking-wide text-slate-700 text-xs font-bold mb-2" for="grid-first-name">
+                                        Your Name
+                                    </label>
+                                    <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-first-name" type="text" placeholder="Jane">
+                                </div>
+                                <div class="w-full md:w-1/2 px-3">
+                                    <label class="block uppercase tracking-wide text-slate-700 text-xs font-bold mb-2" for="grid-last-name">
+                                        Your Email
+                                    </label>
+                                    <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-last-name" type="email" placeholder="jane@example.com">
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block uppercase tracking-wide text-slate-700 text-xs font-bold mb-2" for="grid-subject">
+                                    Subject
+                                </label>
+                                <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-subject" type="text" placeholder="Subject of your message">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block uppercase tracking-wide text-slate-700 text-xs font-bold mb-2" for="grid-message">
+                                    Message
+                                </label>
+                                <textarea class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-3 px-4 h-40 leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-message" placeholder="Your message..."></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-primary-light py-8">
+        <div class="container mx-auto px-4 lg:px-6 text-center text-light-text">
+            <div class="copyright">
+                &copy; Copyright <strong><span>Avinash</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                Designed by <a href="https://www.linkedin.com/in/avinash-shukla-9658b1375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-primary hover:underline">Avinash Shukla</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#hero" id="to-top" class="rounded-full">
+        <i class='bx bx-up-arrow-alt text-2xl'></i>
+    </a>
+
+    <!-- Typed.js CDN -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- Typed.js Effect ---
+            if (document.getElementById('typed-text')) {
+                new Typed('#typed-text', {
+                    strings: ['Designer', 'Developer', 'Freelancer', 'Illustrator'],
+                    typeSpeed: 100,
+                    backSpeed: 50,
+                    backDelay: 2000,
+                    loop: true
+                });
+            }
+
+            // --- Mobile Nav Toggle ---
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuToggle && mobileMenu) {
+                menuToggle.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    // Toggle icon
+                    const icon = menuToggle.querySelector('i');
+                    if (mobileMenu.classList.contains('active')) {
+                        icon.classList.remove('bx-menu');
+                        icon.classList.add('bx-x');
+                    } else {
+                        icon.classList.remove('bx-x');
+                        icon.classList.add('bx-menu');
+                    }
+                });
+                // Close menu when a link is clicked
+                document.querySelectorAll('#mobile-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                        menuToggle.querySelector('i').classList.remove('bx-x');
+                        menuToggle.querySelector('i').classList.add('bx-menu');
+                    });
+                });
+            }
+
+            // --- Sticky Header & Active Nav Link ---
+            const header = document.getElementById('header');
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a.nav-link');
+            const toTopButton = document.getElementById('to-top');
+
+            window.addEventListener('scroll', () => {
+                // Sticky Header
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled', 'lg:bg-white/90', 'lg:backdrop-blur-sm', 'lg:shadow-md');
+                } else {
+                    header.classList.remove('scrolled', 'lg:bg-white/90', 'lg:backdrop-blur-sm', 'lg:shadow-md');
+                }
+                
+                // Back to Top Button
+                if (window.scrollY > 300) {
+                    toTopButton.classList.add('visible');
+                } else {
+                    toTopButton.classList.remove('visible');
+                }
+
+                // Active Nav Link Highlighting
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) { // offset for better accuracy
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
+
