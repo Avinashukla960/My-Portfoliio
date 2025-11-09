@@ -13,7 +13,7 @@
     <!-- Boxicons CDN for icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" href="letter-a-logo-icon-design-vector-22731542.webp" type="image/png">
-    <script>
+    <script>3
         // Custom Tailwind theme settings
         tailwind.config = {
             theme: {
@@ -49,8 +49,18 @@
         .section-title h2 {
             position: relative;
             padding-bottom: 12px;
-            font-size: 2.25rem; /* 36px */
+            font-size: 1.75rem; /* 28px on mobile */
             font-weight: 700;
+        }
+        @media (min-width: 640px) {
+            .section-title h2 {
+                font-size: 2rem; /* 32px on small screens */
+            }
+        }
+        @media (min-width: 1024px) {
+            .section-title h2 {
+                font-size: 2.25rem; /* 36px on desktop */
+            }
         }
         .section-title h2::after {
             content: '';
@@ -73,8 +83,18 @@
         .typed-cursor {
             opacity: 1;
             font-weight: 100;
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             animation: blink 0.7s infinite;
+        }
+        @media (min-width: 640px) {
+            .typed-cursor {
+                font-size: 1.75rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .typed-cursor {
+                font-size: 2.5rem;
+            }
         }
         @keyframes blink {
             0% { opacity: 1; }
@@ -85,6 +105,95 @@
         /* Hero text shadow */
         #hero h1, #hero p {
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        /* About section profile image styling */
+        .profile-image {
+            object-fit: cover;
+            object-position: center 35%;
+            height: 550px;
+            width: 100%;
+            display: block;
+            filter: brightness(1.05) contrast(1.05) saturate(1.1);
+            transition: filter 0.4s ease, transform 0.4s ease, object-position 0.4s ease;
+            transform: scale(1.15);
+        }
+        #about .profile-image:hover {
+            filter: brightness(1.1) contrast(1.1) saturate(1.2);
+            transform: scale(1.5);
+            object-position: center 15%;
+        }
+        @media (max-width: 1023px) {
+            .profile-image {
+                object-position: center 30%;
+                height: 450px !important;
+                transform: scale(1.2);
+            }
+            #about .profile-image:hover {
+                transform: scale(1.6);
+                object-position: center 12%;
+            }
+        }
+        @media (max-width: 640px) {
+            .profile-image {
+                object-position: center 25%;
+                height: 400px !important;
+                transform: scale(1.25);
+            }
+            #about .profile-image:hover {
+                transform: scale(1.7);
+                object-position: center 10%;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .profile-image {
+                object-position: center 30%;
+                height: 500px !important;
+                transform: scale(1.18);
+            }
+            #about .profile-image:hover {
+                transform: scale(1.55);
+                object-position: center 15%;
+            }
+        }
+        /* Professional image container styling */
+        #about .relative {
+            border: 4px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+        @media (max-width: 1023px) {
+            #about .relative {
+                border-width: 3px;
+            }
+        }
+        
+        /* Hero background positioning for mobile */
+        #hero {
+            background-position: center center;
+            background-size: cover;
+            transition: background-position 0.5s ease-in-out;
+        }
+        /* iPad and tablet devices */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            #hero {
+                background-position: 70% 40% !important;
+                background-size: cover !important;
+                background-attachment: scroll;
+            }
+        }
+        /* Mobile devices */
+        @media (max-width: 1023px) {
+            #hero {
+                background-position: 70% 40% !important;
+                background-size: cover !important;
+                background-attachment: scroll;
+            }
+        }
+        @media (max-width: 640px) {
+            #hero {
+                background-position: 75% 35% !important;
+                background-size: cover !important;
+            }
         }
 
         /* Nav link styling */
@@ -101,6 +210,22 @@
         #header.scrolled #logo-link {
             @apply lg:text-dark-heading;
         }
+        /* Logo font styling */
+        #logo-link {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 900;
+            font-size: 2rem;
+        }
+        @media (min-width: 640px) {
+            #logo-link {
+                font-size: 2.5rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            #logo-link {
+                font-size: 3rem;
+            }
+        }
         #header.scrolled .nav-link {
             @apply lg:text-light-text;
         }
@@ -113,10 +238,51 @@
         
         /* Mobile nav visible */
         #mobile-menu {
-            @apply hidden absolute top-14 right-4 z-50;
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (min-width: 640px) {
+            #mobile-menu {
+                right: 1rem;
+            }
         }
         #mobile-menu.active {
-            @apply block;
+            display: block;
+        }
+        #mobile-menu .nav-link {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            color: #1e293b;
+        }
+        #mobile-menu .nav-link:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            border-left-color: #4f46e5;
+            padding-left: 1.5rem;
+            color: #4f46e5;
+        }
+        #mobile-menu .nav-link.active {
+            background-color: rgba(79, 70, 229, 0.15);
+            border-left-color: #4f46e5;
+            color: #4f46e5;
         }
         #mobile-menu-toggle {
             @apply text-dark-heading;
@@ -150,8 +316,8 @@
         /* Back to top button */
         #to-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 15px;
+            right: 15px;
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -162,6 +328,12 @@
             justify-content: center;
             transition: all 0.3s ease;
             z-index: 100;
+        }
+        @media (min-width: 640px) {
+            #to-top {
+                bottom: 20px;
+                right: 20px;
+            }
         }
         #to-top.visible {
             display: flex;
@@ -176,10 +348,10 @@
 
     <!-- Header -->
     <header id="header" class="fixed w-full z-40 transition-all duration-300">
-        <nav class="container mx-auto px-4 lg:px-6 py-4">
+        <nav class="container mx-auto px-4 lg:px-6 py-3 lg:py-4">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
-                <a href="index.html" id="logo-link" class="text-3xl font-bold text-dark-heading lg:text-grey transition-colors duration-300">Avinash</a>
+                <a href="index.html" id="logo-link" class="text-dark-heading lg:text-grey transition-colors duration-300">Avinash</a>
                 
                 <!-- Desktop Navigation -->
                 <ul class="hidden lg:flex lg:flex-row lg:space-x-8 lg:mt-0 lg:font-medium">
@@ -190,8 +362,8 @@
                     <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
-                <!-- Social Media Icons -->
-                    <div class="social-border flex space-x-4 pl-6 ml-6 border-l border-white/30 transition-colors duration-300">
+                <!-- Social Media Icons - Hidden on mobile, shown on desktop -->
+                    <div class="hidden lg:flex social-border space-x-4 pl-6 ml-6 border-l border-white/30 transition-colors duration-300">
                         <a href="https://x.com/avinashukla960" class="social-link"><i class='bx bxl-twitter text-xl'></i></a>
                         <a href="#" class="social-link"><i class='bx bxl-facebook text-xl'></i></a>
                         <a href="https://www.instagram.com/avinash_shukla960?igsh=eWozd3Vnamhsczhz" class="social-link"><i class='bx bxl-instagram text-xl'></i></a>
@@ -206,19 +378,19 @@
 
             <!-- ... existing code ... -->
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="lg:hidden w-48 bg-dark-heading rounded-md shadow-lg py-1">
-                <a href="#hero" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#resume" class="nav-link">Resume</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#portfolio" class="nav-link">Portfolio</a>
-                <a href="#contact" class="nav-link">Contact</a>
+            <div id="mobile-menu" class="lg:hidden w-56 sm:w-64 rounded-xl py-3 mt-2 overflow-hidden" style="display: none;">
+                <a href="#hero" class="nav-link active block py-2.5 px-4 font-medium">Home</a>
+                <a href="#about" class="nav-link block py-2.5 px-4 font-medium">About</a>
+                <a href="#resume" class="nav-link block py-2.5 px-4 font-medium">Resume</a>
+                <a href="#services" class="nav-link block py-2.5 px-4 font-medium">Services</a>
+                <a href="#portfolio" class="nav-link block py-2.5 px-4 font-medium">Portfolio</a>
+                <a href="#contact" class="nav-link block py-2.5 px-4 font-medium">Contact</a>
                  <!-- Mobile Social Links -->
-                <div class="flex justify-center space-x-4 p-3 border-t border-slate-700 mt-2">
-                    <a href="https://x.com/avinashukla960" class="text-white hover:text-primary transition-colors duration-200"><i class='bx bxl-twitter text-xl'></i></a>
-                    <a href="#" class="text-white hover:text-primary transition-colors duration-200"><i class='bx bxl-facebook text-xl'></i></a>
-                    <a href="https://www.instagram.com/avinash_shukla960?igsh=eWozd3Vnamhsczhz" class="text-white hover:text-primary transition-colors duration-200"><i class='bx bxl-instagram text-xl'></i></a>
-                    <a href="https://www.linkedin.com/in/avinash-shukla-9658b1375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-white hover:text-primary transition-colors duration-200"><i class='bx bxl-linkedin text-xl'></i></a>
+                <div class="flex justify-center items-center space-x-4 p-4 border-t border-slate-200 mt-2">
+                    <a href="https://x.com/avinashukla960" class="text-slate-600 hover:text-yellow-500 transition-all duration-300 transform hover:scale-110 hover:rotate-12"><i class='bx bxl-twitter text-xl'></i></a>
+                    <a href="#" class="text-slate-600 hover:text-blue-600 transition-all duration-300 transform hover:scale-110 hover:rotate-12"><i class='bx bxl-facebook text-xl'></i></a>
+                    <a href="https://www.instagram.com/avinash_shukla960?igsh=eWozd3Vnamhsczhz" class="text-slate-600 hover:text-pink-500 transition-all duration-300 transform hover:scale-110 hover:rotate-12"><i class='bx bxl-instagram text-xl'></i></a>
+                    <a href="https://www.linkedin.com/in/avinash-shukla-9658b1375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-slate-600 hover:text-blue-600 transition-all duration-300 transform hover:scale-110 hover:rotate-12"><i class='bx bxl-linkedin text-xl'></i></a>
                 </div>
             </div>
 <!-- ... existing code ... -->
@@ -227,53 +399,55 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="w-full h-screen flex items-center justify-start bg-cover bg-center bg-no-repeat" style="background-image: url('1761903199692 (2).jpg');">
-        <div class="relative text-left -mt-16 lg:-mt-0 container mx-auto px-4 lg:px-6">
-            <h1 class="text-5xl lg:text-7xl font-bold text-grey mb-4">Avinash Shukla</h1>
-            <p class="text-2xl lg:text-4xl text-grey">I'm a <span id="typed-text" class="font-semibold"></span><span class="typed-cursor">|</span></p>
+    <section id="hero" class="w-full h-screen flex items-center justify-start bg-cover bg-no-repeat" style="background-image: url('1761903199692 (2).jpg');">
+        <div class="relative text-left -mt-16 lg:-mt-0 container mx-auto px-4 sm:px-6 lg:px-6 pt-20 sm:pt-24">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-grey mb-3 sm:mb-4 leading-tight">Avinash Shukla</h1>
+            <p class="text-lg sm:text-xl md:text-2xl lg:text-4xl text-grey">I'm a <span id="typed-text" class="font-semibold"></span><span class="typed-cursor">|</span></p>
         </div>
     </section>
 
     <main id="main">
 
         <!-- About Section -->
-        <section id="about" class="py-16 lg:py-24">
-            <div class="container mx-auto px-4 lg:px-6">
-                <div class="section-title mb-8">
+        <section id="about" class="py-12 sm:py-16 lg:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-6">
+                <div class="section-title mb-6 sm:mb-8">
                     <h2>About</h2>
-                    <p class="mt-4 text-light-text text-lg">Hi, I'm Avinash, a Developer with a love for technology and design. My goal is to create work that not only functions perfectly but also inspires and engages users.</p>
+                    <p class="mt-3 sm:mt-4 text-light-text text-base sm:text-lg">Hi, I'm Avinash, a Developer with a love for technology and design. My goal is to create work that not only functions perfectly but also inspires and engages users.</p>
                 </div>
 
                 <div class="flex flex-wrap -mx-4">
                     <!-- Profile Image -->
                     <div class="w-full lg:w-1/3 px-4 mb-6 lg:mb-0">
-                        <img src="1761906689417.jpg" class="rounded-lg shadow-lg" alt="Avinash Kumar">
+                        <div class="relative overflow-hidden rounded-xl shadow-2xl">
+                            <img src="43851.jpg" class="w-full profile-image" alt="Avinash Shukla">
+                        </div>
                     </div>
                     <!-- Profile Details -->
                     <div class="w-full lg:w-2/3 px-4">
-                        <h3 class="text-3xl font-bold text-primary mb-2">Web Developer , Programmer & UI/UX Designer</h3>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-primary mb-2">Web Developer , Programmer & UI/UX Designer</h3>
                         <p class="italic mb-6">
                             
                         </p>
-                        <div class="flex flex-wrap -mx-4 mb-6">
+                        <div class="flex flex-wrap -mx-4 mb-4 sm:mb-6">
                             <div class="w-full lg:w-1/2 px-4 mb-4">
-                                <ul class="space-y-3">
-                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Birthday:</strong> 4th April 2008</li>
-                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Website:</strong> www.avinashshukla.com</li>
-                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Phone:</strong> +91 9302924426</li>
-                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>City:</strong> Rewa Madhya Pradesh India</li>
+                                <ul class="space-y-2 sm:space-y-3 text-sm sm:text-base">
+                                    <li class="break-words"><i class='bx bx-chevron-right text-primary'></i> <strong>Birthday:</strong> 4th April 2008</li>
+                                    <li class="break-words"><i class='bx bx-chevron-right text-primary'></i> <strong>Website:</strong> www.avinashshukla.com</li>
+                                    <li class="break-words"><i class='bx bx-chevron-right text-primary'></i> <strong>Phone:</strong> +91 9302924426</li>
+                                    <li class="break-words"><i class='bx bx-chevron-right text-primary'></i> <strong>City:</strong> Rewa Madhya Pradesh India</li>
                                 </ul>
                             </div>
                             <div class="w-full lg:w-1/2 px-4 mb-4">
-                                <ul class="space-y-3">
-                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Age:</strong> 17</li>
-                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Degree:</strong> Bachelor(Running)</li>
-                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Email:</strong> avinashshukla960@gmail.com</li>
-                                    <li><i class='bx bx-chevron-right text-primary'></i> <strong>Freelance:</strong> Available</li>
+                                <ul class="space-y-2 sm:space-y-3 text-sm sm:text-base">
+                                    <li class="break-words"><i class='bx bx-chevron-right text-primary'></i> <strong>Age:</strong> 17</li>
+                                    <li class="break-words"><i class='bx bx-chevron-right text-primary'></i> <strong>Degree:</strong> Bachelor  of Technology(Running)</li>
+                                    <li class="break-words"><i class='bx bx-chevron-right text-primary'></i> <strong>Email:</strong> avinashshukla960@gmail.com</li>
+                                    <li class="break-words"><i class='bx bx-chevron-right text-primary'></i> <strong>Freelance:</strong> Available</li>
                                 </ul>
                             </div>
                         </div>
-                        <p class="text-light-text">
+                        <p class="text-light-text text-sm sm:text-base">
                            
 A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and highly performant digital experiences. I thrive on solving complex problems and turning innovative ideas into reality.
                         </p>
@@ -281,13 +455,13 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
                 </div>
                 
                 <!-- Skills -->
-                <div class="mt-12">
-                    <div class="section-title mb-8">
+                <div class="mt-8 sm:mt-12">
+                    <div class="section-title mb-6 sm:mb-8">
                         <h2>Skills</h2>
                     </div>
                     <div class="flex flex-wrap -mx-4">
                         <div class="w-full lg:w-1/2 px-4 mb-4">
-                            <div class="mb-2 flex justify-between">
+                            <div class="mb-2 flex justify-between text-sm sm:text-base">
                                 <span class="font-medium text-dark-heading">HTML</span>
                                 <span class="font-medium text-dark-heading">65%</span>
                             </div>
@@ -296,7 +470,7 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
                             </div>
                         </div>
                         <div class="w-full lg:w-1/2 px-4 mb-4">
-                            <div class="mb-2 flex justify-between">
+                            <div class="mb-2 flex justify-between text-sm sm:text-base">
                                 <span class="font-medium text-dark-heading">CSS</span>
                                 <span class="font-medium text-dark-heading">65%</span>
                             </div>
@@ -305,7 +479,7 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
                             </div>
                         </div>
                         <div class="w-full lg:w-1/2 px-4 mb-4">
-                            <div class="mb-2 flex justify-between">
+                            <div class="mb-2 flex justify-between text-sm sm:text-base">
                                 <span class="font-medium text-dark-heading">C</span>
                                 <span class="font-medium text-dark-heading">80%</span>
                             </div>
@@ -314,8 +488,8 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
                             </div>
                         </div>
                         <div class="w-full lg:w-1/2 px-4 mb-4">
-                            <div class="mb-2 flex justify-between">
-                                <span class="font-medium text-dark-heading">Creative Editing/Sketching</span>
+                            <div class="mb-2 flex justify-between text-sm sm:text-base">
+                                <span class="font-medium text-dark-heading break-words">Creative Editing/Sketching</span>
                                 <span class="font-medium text-dark-heading">85%</span>
                             </div>
                             <div class="w-full bg-slate-200 rounded-full h-2.5">
@@ -329,37 +503,37 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
         </section>
 
         <!-- Resume Section -->
-        <section id="resume" class="py-16 lg:py-24 bg-slate-50">
-            <div class="container mx-auto px-4 lg:px-6">
-                <div class="section-title mb-8">
+        <section id="resume" class="py-12 sm:py-16 lg:py-24 bg-slate-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-6">
+                <div class="section-title mb-6 sm:mb-8">
                     <h2>Resume</h2>
-                    <p class="mt-4 text-light-text text-lg">Check out my resume - </p>
+                    <p class="mt-3 sm:mt-4 text-light-text text-base sm:text-lg">Check out my resume - </p>
                 </div>
                 
                 <div class="flex flex-wrap -mx-4">
                     <!-- Left Column -->
                     <div class="w-full lg:w-1/2 px-4">
-                        <h3 class="text-2xl font-bold text-dark-heading mb-4">Summary</h3>
-                        <div class="relative border-l-2 border-primary pl-6 mb-6">
-                            <h4 class="text-xl font-bold text-primary">Avinash Shukla</h4>
-                            <p class="italic mb-2">Innovative and deadline-driven Graphic Designer with 2+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</p>
-                            <ul class="list-disc list-inside space-y-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-dark-heading mb-3 sm:mb-4">Summary</h3>
+                        <div class="relative border-l-2 border-primary pl-4 sm:pl-6 mb-6">
+                            <h4 class="text-lg sm:text-xl font-bold text-primary mb-1">Avinash Shukla</h4>
+                            <p class="italic mb-2 text-sm sm:text-base">Innovative and deadline-driven Graphic Designer with 2+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</p>
+                            <ul class="list-disc list-inside space-y-1 text-sm sm:text-base">
                                 <li>Rewa Madhya Pradesh India</li>
                                 <li>+91 9302924426</li>
-                                <li>avinashshukla960@gmail.com</li>
+                                <li class="break-words">avinashshukla960@gmail.com</li>
                             </ul>
                         </div>
 
-                        <h3 class="text-2xl font-bold text-dark-heading mb-4">Education</h3>
-                        <div class="relative border-l-2 border-primary pl-6 mb-6">
-                            <h4 class="text-xl font-bold text-primary">Bachelor of Technology</h4>
-                            <span class="inline-block bg-primary-light text-dark-heading font-medium px-3 py-1 rounded-md text-sm my-2">2025 - 2029</span>
-                            <p class="italic mb-2">Jaypee University OF Engineering and Technology Guna</p>
+                        <h3 class="text-xl sm:text-2xl font-bold text-dark-heading mb-3 sm:mb-4">Education</h3>
+                        <div class="relative border-l-2 border-primary pl-4 sm:pl-6 mb-6">
+                            <h4 class="text-lg sm:text-xl font-bold text-primary">Bachelor of Technology</h4>
+                            <span class="inline-block bg-primary-light text-dark-heading font-medium px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm my-2">2025 - 2029</span>
+                            <p class="italic mb-2 text-sm sm:text-base">Jaypee University OF Engineering and Technology Guna (MP)</p>
                             
-                        <div class="relative border-l-2 border-primary pl-6 mb-6">
-                            <h4 class="text-xl font-bold text-primary">High School</h4>
-                            <span class="inline-block bg-primary-light text-dark-heading font-medium px-3 py-1 rounded-md text-sm my-2">2024 - 2025</span>
-                            <p class="italic mb-2">Sardar Patel Higher Secondary School Jaypee Nagar Rewa</p>
+                        <div class="relative border-l-2 border-primary pl-4 sm:pl-6 mb-6">
+                            <h4 class="text-lg sm:text-xl font-bold text-primary">High School</h4>
+                            <span class="inline-block bg-primary-light text-dark-heading font-medium px-2 sm:px-3 py-1 rounded-md text-xs sm:text-sm my-2">2024 - 2025</span>
+                            <p class="italic mb-2 text-sm sm:text-base">Sardar Patel Higher Secondary School Jaypee Nagar Rewa</p>
                             
                     </div>
 
@@ -372,63 +546,71 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="py-16 lg:py-24">
-            <div class="container mx-auto px-4 lg:px-6">
-                <div class="section-title mb-8">
+        <section id="services" class="py-12 sm:py-16 lg:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-6">
+                <div class="section-title mb-6 sm:mb-8">
                     <h2>Services</h2>
                     
                 </div>
                 
                 <div class="flex flex-wrap -mx-4">
                     <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-6">
-                        <div class="p-6 text-center border border-slate-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="inline-flex items-center justify-center w-16 h-16 mb-4 text-white bg-primary rounded-full text-3xl">
+                        <div class="p-4 sm:p-6 text-center border border-slate-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 mb-3 sm:mb-4 text-white bg-primary rounded-full text-2xl sm:text-3xl">
                                 <i class='bx bxl-dribbble'></i>
                             </div>
-                            <h4 class="text-2xl font-bold mb-2">Web Development</h4>
+                            <h4 class="text-xl sm:text-2xl font-bold mb-2">Web Development</h4>
                             
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-6">
-                        <div class="p-6 text-center border border-slate-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                            <div class="inline-flex items-center justify-center w-16 h-16 mb-4 text-white bg-primary rounded-full text-3xl">
+                        <div class="p-4 sm:p-6 text-center border border-slate-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 mb-3 sm:mb-4 text-white bg-primary rounded-full text-2xl sm:text-3xl">
                                 <i class='bx bx-file'></i>
                             </div>
-                            <h4 class="text-2xl font-bold mb-2">Software Developement</h4>
+                            <h4 class="text-xl sm:text-2xl font-bold mb-2">Software Developement</h4>
                             
                         </div>
                     </div>
-                    
+                    <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-6 md:ml-auto lg:ml-0">
+                        <div class="p-4 sm:p-6 text-center border border-slate-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                            <div class="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 mb-3 sm:mb-4 text-white bg-primary rounded-full text-2xl sm:text-3xl">
+                                <i class='bx bx-file'></i>
+                            </div>
+                            <h4 class="text-xl sm:text-2xl font-bold mb-2">Freelancing</h4>
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="py-16 lg:py-24 bg-slate-50">
-            <div class="container mx-auto px-4 lg:px-6">
-                <div class="section-title mb-8">
+        <section id="portfolio" class="py-12 sm:py-16 lg:py-24 bg-slate-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-6">
+                <div class="section-title mb-6 sm:mb-8">
                     <h2>Portfolio</h2>
-                    <p class="mt-4 text-light-text text-lg">
+                    <p class="mt-3 sm:mt-4 text-light-text text-base sm:text-lg">
                 </div>
 
                 <!-- Note: The original has isotope filtering, this is a simplified static grid -->
                 <div class="flex flex-wrap -mx-2">
-                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                         <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+1" class="w-full rounded-lg shadow-md" alt="Portfolio Item 1">
                     </div>
-                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                         <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+2" class="w-full rounded-lg shadow-md" alt="Portfolio Item 2">
                     </div>
-                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                         <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+3" class="w-full rounded-lg shadow-md" alt="Portfolio Item 3">
                     </div>
-                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                         <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+4" class="w-full rounded-lg shadow-md" alt="Portfolio Item 4">
                     </div>
-                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                         <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+5" class="w-full rounded-lg shadow-md" alt="Portfolio Item 5">
                     </div>
-                    <div class="w-full md:w-1/2 lg:w-1/3 p-2">
+                    <div class="w-full sm:w-1/2 lg:w-1/3 p-2">
                         <img src="https://placehold.co/600x400/eef2ff/4338ca?text=Portfolio+6" class="w-full rounded-lg shadow-md" alt="Portfolio Item 6">
                     </div>
                 </div>
@@ -437,72 +619,72 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-16 lg:py-24">
-            <div class="container mx-auto px-4 lg:px-6">
-                <div class="section-title mb-8">
+        <section id="contact" class="py-12 sm:py-16 lg:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-6">
+                <div class="section-title mb-6 sm:mb-8">
                     <h2>Contact</h2>
                     
                 </div>
 
                 <div class="flex flex-wrap -mx-4">
                     <!-- Contact Info -->
-                    <div class="w-full lg:w-1/3 px-4">
-                        <div class="space-y-6">
-                            <div class="flex items-start p-4 bg-primary-light rounded-lg">
-                                <i class="bx bx-map text-3xl text-primary p-3 bg-white rounded-full shadow-md"></i>
-                                <div class="ml-4">
-                                    <h4 class="text-xl font-bold">Location:</h4>
-                                    <p>Jaypee University Of Engineering And Technology Guna</p>
+                    <div class="w-full lg:w-1/3 px-4 mb-6 lg:mb-0">
+                        <div class="space-y-4 sm:space-y-6">
+                            <div class="flex items-start p-3 sm:p-4 bg-primary-light rounded-lg">
+                                <i class="bx bx-map text-2xl sm:text-3xl text-primary p-2 sm:p-3 bg-white rounded-full shadow-md flex-shrink-0"></i>
+                                <div class="ml-3 sm:ml-4">
+                                    <h4 class="text-lg sm:text-xl font-bold">Location:</h4>
+                                    <p class="text-sm sm:text-base break-words">Jaypee University Of Engineering And Technology Guna</p>
                                 </div>
                             </div>
-                            <div class="flex items-start p-4 bg-primary-light rounded-lg">
-                                <i class="bx bx-envelope text-3xl text-primary p-3 bg-white rounded-full shadow-md"></i>
-                                <div class="ml-4">
-                                    <h4 class="text-xl font-bold">Email:</h4>
-                                    <p>avinashsukla960@gmail.com</p>
+                            <div class="flex items-start p-3 sm:p-4 bg-primary-light rounded-lg">
+                                <i class="bx bx-envelope text-2xl sm:text-3xl text-primary p-2 sm:p-3 bg-white rounded-full shadow-md flex-shrink-0"></i>
+                                <div class="ml-3 sm:ml-4">
+                                    <h4 class="text-lg sm:text-xl font-bold">Email:</h4>
+                                    <p class="text-sm sm:text-base break-words">avinashsukla960@gmail.com</p>
                                 </div>
                             </div>
-                            <div class="flex items-start p-4 bg-primary-light rounded-lg">
-                                <i class="bx bx-phone text-3xl text-primary p-3 bg-white rounded-full shadow-md"></i>
-                                <div class="ml-4">
-                                    <h4 class="text-xl font-bold">Call:</h4>
-                                    <p>+91 9302924426</p>
+                            <div class="flex items-start p-3 sm:p-4 bg-primary-light rounded-lg">
+                                <i class="bx bx-phone text-2xl sm:text-3xl text-primary p-2 sm:p-3 bg-white rounded-full shadow-md flex-shrink-0"></i>
+                                <div class="ml-3 sm:ml-4">
+                                    <h4 class="text-lg sm:text-xl font-bold">Call:</h4>
+                                    <p class="text-sm sm:text-base">+91 9302924426</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Contact Form -->
-                    <div class="w-full lg:w-2/3 px-4 mt-8 lg:mt-0">
-                        <form action="#" method="post" role="form" class="p-6 bg-white rounded-lg shadow-lg border border-slate-200">
-                            <div class="flex flex-wrap -mx-3 mb-6">
-                                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <div class="w-full lg:w-2/3 px-4 mt-6 lg:mt-0">
+                        <form action="#" method="post" role="form" class="p-4 sm:p-6 bg-white rounded-lg shadow-lg border border-slate-200">
+                            <div class="flex flex-wrap -mx-3 mb-4 sm:mb-6">
+                                <div class="w-full md:w-1/2 px-3 mb-4 sm:mb-6 md:mb-0">
                                     <label class="block uppercase tracking-wide text-slate-700 text-xs font-bold mb-2" for="grid-first-name">
                                         Your Name
                                     </label>
-                                    <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-first-name" type="text" placeholder="Jane">
+                                    <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-first-name" type="text" placeholder="Jane">
                                 </div>
                                 <div class="w-full md:w-1/2 px-3">
                                     <label class="block uppercase tracking-wide text-slate-700 text-xs font-bold mb-2" for="grid-last-name">
                                         Your Email
                                     </label>
-                                    <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-last-name" type="email" placeholder="jane@example.com">
+                                    <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-last-name" type="email" placeholder="jane@example.com">
                                 </div>
                             </div>
-                            <div class="mb-6">
+                            <div class="mb-4 sm:mb-6">
                                 <label class="block uppercase tracking-wide text-slate-700 text-xs font-bold mb-2" for="grid-subject">
                                     Subject
                                 </label>
-                                <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-subject" type="text" placeholder="Subject of your message">
+                                <input class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-subject" type="text" placeholder="Subject of your message">
                             </div>
-                            <div class="mb-6">
+                            <div class="mb-4 sm:mb-6">
                                 <label class="block uppercase tracking-wide text-slate-700 text-xs font-bold mb-2" for="grid-message">
                                     Message
                                 </label>
-                                <textarea class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-3 px-4 h-40 leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-message" placeholder="Your message..."></textarea>
+                                <textarea class="appearance-none block w-full bg-slate-50 text-slate-700 border border-slate-200 rounded py-2 sm:py-3 px-3 sm:px-4 h-32 sm:h-40 text-sm sm:text-base leading-tight focus:outline-none focus:bg-white focus:border-primary" id="grid-message" placeholder="Your message..."></textarea>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg">
+                                <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg text-sm sm:text-base">
                                     Send Message
                                 </button>
                             </div>
@@ -516,14 +698,14 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
     </main>
     
     <!-- Footer -->
-    <footer class="bg-primary-light py-8">
-        <div class="container mx-auto px-4 lg:px-6 text-center text-light-text">
-            <div class="copyright">
+    <footer class="bg-primary-light py-6 sm:py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-6 text-center text-light-text">
+            <div class="copyright text-sm sm:text-base mb-2">
                 &copy; Copyright <strong><span>Avinash</span></strong>. All Rights Reserved
             </div>
-            <div class="credits">
+            <div class="credits text-xs sm:text-sm">
                 <!-- All the links in the footer should remain intact. -->
-                Designed by <a href="https://www.linkedin.com/in/avinash-shukla-9658b1375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-primary hover:underline">Avinash Shukla</a>
+                Designed by <a href="https://www.linkedin.com/in/avinash-shukla-9658b1375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-primary hover:underline break-words">Avinash Shukla</a>
             </div>
         </div>
     </footer>
@@ -554,8 +736,18 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
             const menuToggle = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
             if (menuToggle && mobileMenu) {
+                // Ensure menu is hidden on page load
+                mobileMenu.style.display = 'none';
+                
                 menuToggle.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('active');
+                    const isActive = mobileMenu.classList.contains('active');
+                    if (isActive) {
+                        mobileMenu.classList.remove('active');
+                        mobileMenu.style.display = 'none';
+                    } else {
+                        mobileMenu.classList.add('active');
+                        mobileMenu.style.display = 'block';
+                    }
                     // Toggle icon
                     const icon = menuToggle.querySelector('i');
                     if (mobileMenu.classList.contains('active')) {
@@ -570,6 +762,7 @@ A passionate Web Developer/Designer dedicated to crafting clean, intuitive, and 
                 document.querySelectorAll('#mobile-menu a').forEach(link => {
                     link.addEventListener('click', () => {
                         mobileMenu.classList.remove('active');
+                        mobileMenu.style.display = 'none';
                         menuToggle.querySelector('i').classList.remove('bx-x');
                         menuToggle.querySelector('i').classList.add('bx-menu');
                     });
